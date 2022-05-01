@@ -1,17 +1,33 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import ReactDOM from 'react-dom';
+
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+ReactDOM.render(<App />, document.getElementById('root'));
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+/*
+React 18 introduces a new root API which provides better
+ergonomics for managing roots. The new root API also 
+enables the new concurrent renderer, which allows you 
+to opt-into concurrent features.
+
+// Before
+import { render } from 'react-dom';
+const container = document.getElementById('app');
+render(<App tab="home" />, container);
+
+// After
+import { createRoot } from 'react-dom/client';
+const container = document.getElementById('app');
+const root = createRoot(container); 
+// createRoot(container!) if you use TypeScript
+root.render(<App tab="home" />);
+
+We’ve also changed unmountComponentAtNode to root.unmount:
+
+// Before
+unmountComponentAtNode(container);
+
+// After
+root.unmount();
+*/
